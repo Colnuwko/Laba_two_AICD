@@ -33,6 +33,7 @@ void menu_3()
 	cout << "5. Умножить вектор на число" << endl;
 	cout << "6. вычислить площадь треугольника" << endl;
 	cout << "7. Сравнить вектора" << endl;
+	cout << "8. Изменить элемент вектора" << endl;
 	cout << "esc -  выход" << endl;
 }
 int get_key()
@@ -51,6 +52,8 @@ int main()
 	int size;
 	setlocale(LC_ALL, "Rus");
 	int key = 0;
+	try
+	{
 	while (key != 27)
 	{
 		while (key != 27)
@@ -85,16 +88,19 @@ int main()
 					case 50:
 					{
 						system("cls");
-						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-						int size;
+						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
+						int size_one;
+						int size_two;
 						int epsilon;
-						cin >> size;
-						cout << "Замечательно, а теперь введите число сравнения" << endl;
+						cin >> size_one;
+						cout << "А теперь введем размерность 2 вектора"<<endl;
+						cin >> size_two;
+						cout << "Замечательно, а теперь введите точность сравнения" << endl;
 						cin >> epsilon;
 						cout << "Самое время заполнить вектора" << endl;
-						Vector <int>a(size, epsilon);
+						Vector <int>a(size_one, epsilon);
 						cout << endl << "Остался последний вектор" << endl;
-						Vector <int>b(size, epsilon);
+						Vector <int>b(size_two, epsilon);
 						A = a;
 						B = b;
 						cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
@@ -116,7 +122,7 @@ int main()
 							int epsilon;
 							cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
 							cin >> size;
-							cout << "Замечательно, а теперь введите число сравнения" << endl;
+							cout << "Замечательно, а теперь введите точность сравнения" << endl;
 							cin >> epsilon;
 							cout << "Самое время заполнить вектора" << endl;
 							Vector <int>a(size, epsilon);
@@ -157,6 +163,7 @@ int main()
 					{
 					case 49:
 					{
+
 						res = A + B;
 						cout << "A + B = " << res << endl;
 						_getch();
@@ -249,6 +256,64 @@ int main()
 						_getch();
 						break;
 					}
+					case 56:
+					{
+						repeat:
+						cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
+						int x;
+						x=get_key()-48;
+						if (x == 1)
+						{
+						
+							cout <<"Выберите элемент" << A<<endl;
+							x=get_key()-48;
+							if (x < A.Get_size()+1)
+							{
+								int temp = A[x-1];
+								cout << "Введите новое значение"<<endl;
+								cin >> A[x-1];
+								cout << "предыдущее значение: "<<temp<<"изменено на "<< A[x-1]<<endl;
+
+							}
+							else
+							{
+								cout << "Введеный индекс выходит за рамки вектора"<<endl;
+								_getch();
+								goto repeat;
+							}
+						}
+						else 
+						{
+							if (x == 2)
+							{
+								cout << "Выберите элемент" << B<<endl;
+								x=get_key()-48;
+								if (x < B.Get_size() + 1)
+								{
+									int temp = B[x-1];
+									cout << "Введите новое значение"<<endl;
+									cin >> B[x-1];
+									cout << "предыдущее значение: " << temp << "изменено на " << B[x-1] << endl;
+
+								}
+								else
+								{
+									cout << "Введеный индекс выходит за рамки вектора"<<endl;
+									_getch();
+									goto repeat;
+								}
+							}
+							else
+							{
+								cout <<"У вас только два выбора! Красная или синия таблетка?" << endl;
+								_getch();
+								goto repeat;
+							}
+						}
+
+						_getch();
+						break;
+					}
 					case 27:
 					{
 						system("cls");
@@ -286,16 +351,18 @@ int main()
 					case 50:
 					{
 						system("cls");
-						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-						int size;
+						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
+						int size_one, size_two;
 						double epsilon;
-						cin >> size;
-						cout << "Замечательно, а теперь введите число сравнения" << endl;
+						cin >> size_one;
+						cout << "А теперь введем размерность 2 вектора" << endl;
+						cin >> size_two;
+						cout << "Замечательно, а теперь введите точность сравнения" << endl;
 						cin >> epsilon;
 						cout << "Самое время заполнить вектора" << endl;
-						Vector <double>a(size, epsilon);
+						Vector <double>a(size_one, epsilon);
 						cout << endl << "Остался последний вектор" << endl;
-						Vector <double>b(size, epsilon);
+						Vector <double>b(size_two, epsilon);
 						A = a;
 						B = b;
 						cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
@@ -317,7 +384,7 @@ int main()
 							double epsilon;
 							cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
 							cin >> size;
-							cout << "Замечательно, а теперь введите число сравнения" << endl;
+							cout << "Замечательно, а теперь введите точность сравнения" << endl;
 							cin >> epsilon;
 							cout << "Самое время заполнить вектора" << endl;
 							Vector <double>a(size, epsilon);
@@ -450,6 +517,64 @@ int main()
 						_getch();
 						break;
 					}
+					case 56:
+					{
+					repeatDouble:
+						cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
+						int x;
+						x = get_key() - 48;
+						if (x == 1)
+						{
+
+							cout << "Выберите элемент" << A << endl;
+							x = get_key() - 48;
+							if (x < A.Get_size() + 1)
+							{
+								double temp = A[x - 1];
+								cout << "Введите новое значение" << endl;
+								cin >> A[x - 1];
+								cout << "предыдущее значение: " << temp << "изменено на " << A[x - 1] << endl;
+
+							}
+							else
+							{
+								cout << "Введеный индекс выходит за рамки вектора" << endl;
+								_getch();
+								goto repeatDouble;
+							}
+						}
+						else
+						{
+							if (x == 2)
+							{
+								cout << "Выберите элемент" << B << endl;
+								x = get_key() - 48;
+								if (x < B.Get_size() + 1)
+								{
+									double temp = B[x - 1];
+									cout << "Введите новое значение" << endl;
+									cin >> B[x - 1];
+									cout << "предыдущее значение: " << temp << "изменено на " << B[x - 1] << endl;
+
+								}
+								else
+								{
+									cout << "Введеный индекс выходит за рамки вектора" << endl;
+									_getch();
+									goto repeatDouble;
+								}
+							}
+							else
+							{
+								cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
+								_getch();
+								goto repeatDouble;
+							}
+						}
+
+						_getch();
+						break;
+					}
 					case 27:
 					{
 						system("cls");
@@ -486,16 +611,18 @@ int main()
 					case 50:
 					{
 						system("cls");
-						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-						int size;
+						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
+						int size_one,size_two;
 						float epsilon;
-						cin >> size;
-						cout << "Замечательно, а теперь введите число сравнения" << endl;
+						cin >> size_one;
+						cout << "А теперь введем размерность 2 вектора" << endl;
+						cin >> size_two;
+						cout << "Замечательно, а теперь введите точность сравнения" << endl;
 						cin >> epsilon;
 						cout << "Самое время заполнить вектора" << endl;
-						Vector <float>a(size, epsilon);
+						Vector <float>a(size_one, epsilon);
 						cout << endl << "Остался последний вектор" << endl;
-						Vector <float>b(size, epsilon);
+						Vector <float>b(size_two, epsilon);
 						A = a;
 						B = b;
 						cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
@@ -517,7 +644,7 @@ int main()
 							float epsilon;
 							cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
 							cin >> size;
-							cout << "Замечательно, а теперь введите число сравнения" << endl;
+							cout << "Замечательно, а теперь введите точность сравнения" << endl;
 							cin >> epsilon;
 							cout << "Самое время заполнить вектора" << endl;
 							Vector <float>a(size, epsilon);
@@ -650,6 +777,64 @@ int main()
 						_getch();
 						break;
 					}
+					case 56:
+					{
+					repeat_float:
+						cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
+						int x;
+						x = get_key() - 48;
+						if (x == 1)
+						{
+
+							cout << "Выберите элемент" << A << endl;
+							x = get_key() - 48;
+							if (x < A.Get_size() + 1)
+							{
+								float temp = A[x - 1];
+								cout << "Введите новое значение" << endl;
+								cin >> A[x - 1];
+								cout << "предыдущее значение: " << temp << "изменено на " << A[x - 1] << endl;
+
+							}
+							else
+							{
+								cout << "Введеный индекс выходит за рамки вектора" << endl;
+								_getch();
+								goto repeat_float;
+							}
+						}
+						else
+						{
+							if (x == 2)
+							{
+								cout << "Выберите элемент" << B << endl;
+								x = get_key() - 48;
+								if (x < B.Get_size() + 1)
+								{
+									float temp = B[x - 1];
+									cout << "Введите новое значение" << endl;
+									cin >> B[x - 1];
+									cout << "предыдущее значение: " << temp << "изменено на " << B[x - 1] << endl;
+
+								}
+								else
+								{
+									cout << "Введеный индекс выходит за рамки вектора" << endl;
+									_getch();
+									goto repeat_float;
+								}
+							}
+							else
+							{
+								cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
+								_getch();
+								goto repeat_float;
+							}
+						}
+
+						_getch();
+						break;
+					}
 					case 27:
 					{
 						system("cls");
@@ -686,16 +871,18 @@ int main()
 					case 50:
 					{
 						system("cls");
-						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-						int size;
+						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
+						int size_one, size_two;
 						complex<double> epsilon;
-						cin >> size;
+						cin >> size_one;
+						cout << "А теперь введем размерность 2 вектора" << endl;
+						cin >> size_two;
 						cout << "Замечательно, а теперь введите число сравнения" << endl;
 						cin >> epsilon;
 						cout << "Самое время заполнить вектора" << endl;
-						Vector <complex<double>>a(size, epsilon);
+						Vector <complex<double>>a(size_one, epsilon);
 						cout << endl << "Остался последний вектор" << endl;
-						Vector < complex<double>>b(size, epsilon);
+						Vector < complex<double>>b(size_two, epsilon);
 						A = a;
 						B = b;
 						cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
@@ -843,6 +1030,73 @@ int main()
 						_getch();
 						break;
 					}
+					case 56:
+					{
+					repeat_complex_double:
+						cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
+						int x;
+						x = get_key() - 48;
+						if (x == 1)
+						{
+
+							cout << "Выберите элемент" << A << endl;
+							x = get_key() - 48;
+							if (x < A.Get_size() + 1)
+							{
+								double real;
+								double image;
+								complex<double> temp = A[x - 1];
+								cout << "Введите новое значение действительной части" << endl;
+								cin >> real;
+								cout << "Введите новое значение мнимой части" << endl;
+								cin>> image;
+								A[x - 1]= complex<double>(real,image);
+								cout << "предыдущее значение: " << temp << "изменено на " << A[x - 1] << endl;
+
+							}
+							else
+							{
+								cout << "Введеный индекс выходит за рамки вектора" << endl;
+								_getch();
+								goto repeat_complex_double;
+							}
+						}
+						else
+						{
+							if (x == 2)
+							{
+								cout << "Выберите элемент" << B << endl;
+								x = get_key() - 48;
+								if (x < B.Get_size() + 1)
+								{
+									double real;
+									double image;
+									complex<double> temp = B[x - 1];
+									cout << "Введите новое значение действительной части" << endl;
+									cin >> real;
+									cout << "Введите новое значение мнимой части" << endl;
+									cin >> image;
+									B[x - 1] = complex<double>(real, image);
+									cout << "предыдущее значение: " << temp << "изменено на " << B[x - 1] << endl;
+								}
+								else
+								{
+									cout << "Введеный индекс выходит за рамки вектора" << endl;
+									_getch();
+									goto repeat_complex_double;
+								}
+							}
+							else
+							{
+								cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
+								_getch();
+								goto repeat_complex_double;
+							}
+						}
+
+						_getch();
+						break;
+					}
 					case 27:
 					{
 						system("cls");
@@ -879,16 +1133,18 @@ int main()
 					case 50:
 					{
 						system("cls");
-						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-						int size;
+						cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
+						int size_one, size_two;
 						complex<float> epsilon;
-						cin >> size;
-						cout << "Замечательно, а теперь введите число сравнения" << endl;
+						cin >> size_one;
+						cout << "А теперь введем размерность 2 вектора" << endl;
+						cin >> size_two;
+						cout << "Замечательно, а теперь введите точность сравнения" << endl;
 						cin >> epsilon;
 						cout << "Самое время заполнить вектора" << endl;
-						Vector <complex<float>>a(size, epsilon);
+						Vector <complex<float>>a(size_one, epsilon);
 						cout << endl << "Остался последний вектор" << endl;
-						Vector < complex<float>>b(size, epsilon);
+						Vector < complex<float>>b(size_two, epsilon);
 						A = a;
 						B = b;
 						cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
@@ -910,7 +1166,7 @@ int main()
 							complex<float> epsilon;
 							cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
 							cin >> size;
-							cout << "Замечательно, а теперь введите число сравнения" << endl;
+							cout << "Замечательно, а теперь введите точность сравнения" << endl;
 							cin >> epsilon;
 							cout << "Самое время заполнить вектора" << endl;
 							Vector <complex<float>>a(size, epsilon);
@@ -1036,7 +1292,73 @@ int main()
 						_getch();
 						break;
 					}
-				
+					case 56:
+					{
+					repeat_complex_float:
+						cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
+						int x;
+						x = get_key() - 48;
+						if (x == 1)
+						{
+
+							cout << "Выберите элемент" << A << endl;
+							x = get_key() - 48;
+							if (x < A.Get_size() + 1)
+							{
+								float real;
+								float image;
+								complex <float> temp = A[x - 1];
+								cout << "Введите новое значение действительной части" << endl;
+								cin >> real;
+								cout << "Введите новое значение мнимой части" << endl;
+								cin >> image;
+								A[x - 1] = complex<float>(real, image);
+								cout << "предыдущее значение: " << temp << "изменено на " << A[x - 1] << endl;
+
+							}
+							else
+							{
+								cout << "Введеный индекс выходит за рамки вектора" << endl;
+								_getch();
+								goto repeat_complex_float;
+							}
+						}
+						else
+						{
+							if (x == 2)
+							{
+								cout << "Выберите элемент" << B << endl;
+								x = get_key() - 48;
+								if (x < B.Get_size() + 1)
+								{
+									float real;
+									float image;
+									complex<float> temp = B[x - 1];
+									cout << "Введите новое значение действительной части" << endl;
+									cin >> real;
+									cout << "Введите новое значение мнимой части" << endl;
+									cin >> image;
+									B[x - 1] = complex<float>(real, image);
+									cout << "предыдущее значение: " << temp << "изменено на " << B[x - 1] << endl;
+								}
+								else
+								{
+									cout << "Введеный индекс выходит за рамки вектора" << endl;
+									_getch();
+									goto repeat_complex_float;
+								}
+							}
+							else
+							{
+								cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
+								_getch();
+								goto repeat_complex_float;
+							}
+						}
+
+						_getch();
+						break;
+					}
 					case 27:
 					{
 						system("cls");
@@ -1051,5 +1373,18 @@ int main()
 		}
 	}
 		
-	
+	}
+	catch (invalid_argument err)
+	{
+		cout << "invalid argument: " << err.what() << std::endl;
+	}
+	catch(out_of_range err)
+	{
+		cout << "Our of range " << err.what() << std::endl;
+	}
+	catch (logic_error err)
+	{
+		cout << "Logic error: " << err.what() << std::endl;
+	}
+
 }

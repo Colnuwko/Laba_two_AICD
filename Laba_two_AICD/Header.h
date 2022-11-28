@@ -5,6 +5,7 @@
 #include <ctime>
 #include <cmath>
 #include <complex>
+#include <stdexcept>
 using namespace std;
 
 template <typename T>
@@ -28,7 +29,7 @@ public:
 	}
 
 	Vector(int size, T eps) { // конструктор с параметром
-		if (size < 1) throw "Недопустимое значение";
+		if (size < 1) throw invalid_argument("Недопустимое значение");
 		_size = size;
 		epsilon = abs(eps);
 		data = new T[size];
@@ -71,12 +72,12 @@ public:
 		}
 	*/
 	T operator[](int i) const { //ЧТение и запись
-		if (i<0 or i>_size) throw "Invalid index";
+		if (i<0 or i>_size) throw out_of_range("Недопустимое значение");
 		return data[i];
 	}
 
 	T& operator[](int i) {
-		if (i<0 or i>_size)  throw "Invalid index";
+		if (i<0 or i>_size)  throw out_of_range("Недопустимое значение");
 		return data[i];
 	}
 	friend ostream& operator<<(ostream& os, const Vector& a) //вывод
@@ -115,7 +116,7 @@ public:
 	}
 
 	Vector& operator+=(const Vector& a) {		//Сложение векторов
-		if (_size != a._size) throw "Невозможжно сложить векторы";
+		if (_size != a._size) throw logic_error("Невозможжно сложить векторы разной длины");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] += a.data[i];
@@ -130,7 +131,7 @@ public:
 		return tmp;
 	}
 	Vector& operator-=(const Vector& a) {
-		if (_size != a._size) throw "Невозможжно вычесть векторы";
+		if (_size != a._size) throw logic_error("Невозможжно вычесть векторы разной длины");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] -= a.data[i];
@@ -144,7 +145,7 @@ public:
 		return temp;
 	}
 	Vector& operator*=(const Vector& a) { //*this это наш переданный темп, а а соотвтвествеенно как аргумент а
-		if (_size != a._size) throw "Невозможжно умножить векторы";
+		if (_size != a._size) throw logic_error("Невозможжно умножить векторы разной длины");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] *= a.data[i];
@@ -199,7 +200,7 @@ public:
 	}
 	*/
 	Vector& operator/=(const T a) { //*this это наш переданный темп, а а соотвтвествеенно как аргумент а
-		if (a == 0) throw "Невозможжно разделить векторы";
+		if (a == 0) throw logic_error("Невозможжно делить на 0");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] /= a;
@@ -218,7 +219,7 @@ public:
 	}
 	static T sin(Vector a, Vector b) //вычесление синуса для площади
 	{
-		if (a._size != b._size) throw "Векторы не равны";
+		if (a._size != b._size) throw logic_error("Невозможжно вычислить синус между векторами разной размерности");
 		T chislitel = 0;
 		T temp = 0, tmp = 0;
 		T znamenatel = 1;
@@ -272,7 +273,7 @@ public:
 	}
 
 	Vector(int size, complex<V> eps) { // конструктор с параметром
-		if (size < 1) throw "Недопустимое значение";
+		if (size < 1) throw invalid_argument("Недопустимое значение");
 		_size = size;
 		data = new complex<V>[size];
 		cout << "Введите значения:\n";
@@ -305,13 +306,14 @@ public:
 		}
 		return os;
 	}
+	int Get_size() { return _size; }
 	complex<V> operator[](int i) const { //ЧТение и запись
-		if (i<0 or i>_size) throw "Invalid index";
+		if (i<0 or i>_size) throw out_of_range("Invalid index");
 		return data[i];
 	}
 
 	complex<V>& operator[](int i) {
-		if (i<0 or i>_size)  throw "Invalid index";
+		if (i<0 or i>_size)  throw out_of_range("Invalid index");
 		return data[i];
 	}
 
@@ -341,7 +343,7 @@ public:
 	}
 
 	Vector<complex<V>>& operator+=(const Vector<complex<V>>& a) {		//Сложение векторов
-		if (_size != a._size) throw "Невозможжно сложить векторы";
+		if (_size != a._size) throw logic_error("Невозможжно сложить векторы разной длины");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] += a.data[i];
@@ -356,7 +358,7 @@ public:
 		return tmp;
 	}
 	Vector<complex<V>>& operator-=(const Vector<complex<V>>& a) {
-		if (_size != a._size) throw "Невозможжно вычесть векторы";
+		if (_size != a._size) throw logic_error("Невозможжно вычесть векторы разной длины");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] -= a.data[i];
@@ -370,7 +372,7 @@ public:
 		return temp;
 	}
 	Vector<complex<V>>& operator*=(const Vector<complex<V>>& a) { //*this это наш переданный темп, а а соотвтвествеенно как аргумент а
-		if (_size != a._size) throw "Невозможжно умножить векторы";
+		if (_size != a._size) throw logic_error("Невозможжно умножить векторы разной длины");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] *= a.data[i];
@@ -428,14 +430,14 @@ public:
 	}
 	static complex<V> sin(Vector<complex<V>> a, Vector<complex<V>> b) //вычесление синуса для площади
 	{
-		if (a._size != b._size) throw "Векторы не равны";
-		complex<V> chislitel(0, 0);
+		if (a._size != b._size) throw logic_error("Невозможжно вычислить синус между векторами разной размерности");
+		complex<V> numerator(0, 0);
 		complex<V> temp(0, 0);
 		complex<V> tmp(0,0);
-		complex<V> znamenatel(1,0);
+		complex<V> denominator(1,0);
 		//for (size_t i = 0; i < a._size; i++)
 		//{
-		chislitel = a * b;
+		numerator = a * b;
 
 		//}
 		for (size_t i = 0; i < a._size; i++)
@@ -445,10 +447,10 @@ public:
 		}
 		temp = sqrt(temp);
 		tmp = sqrt(tmp);
-		znamenatel = temp * tmp;
+		denominator = temp * tmp;
 		complex<V> w(1, 0);
 		complex<V> q(2, 0);
-		return sqrt(w - pow((chislitel / znamenatel), q));
+		return sqrt(w - pow(numerator / denominator, q));
 	}
 	static complex<V> length(Vector<complex<V>> a, Vector<complex<V>> b) //вычесление произведения длин векторов
 	{
