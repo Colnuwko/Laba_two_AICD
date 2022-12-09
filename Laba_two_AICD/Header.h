@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include <string>
 #include <random>
@@ -16,7 +16,7 @@ private:
 	T epsilon;
 public:
 
-	Vector() { //конструктор по умолчаниюю
+	Vector<T>() { //ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕГѕ
 		srand(time(0));
 		_size = rand() % 3 + 10;
 		epsilon = 0, 000001;
@@ -28,12 +28,12 @@ public:
 
 	}
 
-	Vector(int size, T eps) { // конструктор с параметром
-		if (size < 1) throw invalid_argument("Недопустимое значение");
+	Vector(int size, T eps) { // ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° Г± ГЇГ Г°Г Г¬ГҐГІГ°Г®Г¬
+		if (size < 1) throw invalid_argument("ГЌГҐГ¤Г®ГЇГіГ±ГІГЁГ¬Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ");
 		_size = size;
 		epsilon = abs(eps);
 		data = new T[size];
-		cout << "Введите значения:\n";
+		cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г§Г­Г Г·ГҐГ­ГЁГї:\n";
 		T a;
 		for (size_t i = 0; i < size; i++)
 		{
@@ -42,7 +42,7 @@ public:
 			data[i] = a;
 		}
 	}
-	Vector(const Vector& a) { // конструктор копирования
+	Vector(const Vector& a) { // ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЄГ®ГЇГЁГ°Г®ГўГ Г­ГЁГї
 		data = new T[a._size];
 		_size = a._size;
 		epsilon = a.epsilon;
@@ -52,7 +52,7 @@ public:
 		}
 	}
 	~Vector() { delete[] data; }
-	void Vprint() // метод вывода
+	void Vprint() // Г¬ГҐГІГ®Г¤ ГўГ»ГўГ®Г¤Г 
 	{
 		for (size_t i = 0; i < _size; i++)
 		{
@@ -65,22 +65,21 @@ public:
 			if (i<0 or i>_size) throw "Invalid index";
 			return data[i];
 		}
-
 		double& operator()(int i) {
 			if (i<0 or i>_size)  throw "Invalid index";
 			return data[i];
 		}
 	*/
-	T operator[](int i) const { //ЧТение и запись
-		if (i<0 or i>_size) throw out_of_range("Недопустимое значение");
+	T operator[](int i) const { //Г—Г’ГҐГ­ГЁГҐ ГЁ Г§Г ГЇГЁГ±Гј
+		if (i<0 or i>_size) throw out_of_range("ГЌГҐГ¤Г®ГЇГіГ±ГІГЁГ¬Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ");
 		return data[i];
 	}
 
 	T& operator[](int i) {
-		if (i<0 or i>_size)  throw out_of_range("Недопустимое значение");
+		if (i<0 or i>_size)  throw out_of_range("ГЌГҐГ¤Г®ГЇГіГ±ГІГЁГ¬Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ");
 		return data[i];
 	}
-	friend ostream& operator<<(ostream& os, const Vector& a) //вывод
+	friend ostream& operator<<(ostream& os, const Vector& a) //ГўГ»ГўГ®Г¤
 	{
 		for (int i = 0; i < a._size; ++i)
 		{
@@ -88,7 +87,7 @@ public:
 		}
 		return os;
 	}
-	bool operator==(const Vector& a) {				//Операторы сравнения
+	bool operator==(const Vector& a) {				//ГЋГЇГҐГ°Г ГІГ®Г°Г» Г±Г°Г ГўГ­ГҐГ­ГЁГї
 		if (_size != a._size) {
 			return false;
 		}
@@ -105,18 +104,20 @@ public:
 	bool operator!=(const Vector& a) {
 		return !(*this == a);
 	}
-	Vector operator=(const Vector& a)
+	
+	Vector& operator=(const Vector& a)
 	{
+		//Vector<T> temp;
 		_size = a._size;
-		for (size_t i = 0; i < _size; i++)
+		epsilon = a.epsilon;
+		for (size_t i = 0; i < a._size; i++)
 		{
 			data[i] = a.data[i];
 		}
 		return *this;
 	}
-
-	Vector& operator+=(const Vector& a) {		//Сложение векторов
-		if (_size != a._size) throw logic_error("Невозможжно сложить векторы разной длины");
+	Vector& operator+=(const Vector& a) {		//Г‘Г«Г®Г¦ГҐГ­ГЁГҐ ГўГҐГЄГІГ®Г°Г®Гў
+		if (_size != a._size) throw logic_error("ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® Г±Г«Г®Г¦ГЁГІГј ГўГҐГЄГІГ®Г°Г» Г°Г Г§Г­Г®Г© Г¤Г«ГЁГ­Г»");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] += a.data[i];
@@ -131,28 +132,28 @@ public:
 		return tmp;
 	}
 	Vector& operator-=(const Vector& a) {
-		if (_size != a._size) throw logic_error("Невозможжно вычесть векторы разной длины");
+		if (_size != a._size) throw logic_error("ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® ГўГ»Г·ГҐГ±ГІГј ГўГҐГЄГІГ®Г°Г» Г°Г Г§Г­Г®Г© Г¤Г«ГЁГ­Г»");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] -= a.data[i];
 		}
 		return *this;
 	}
-	Vector operator-(const Vector& a) const { //вычитание векторов
+	Vector operator-(const Vector& a) const { //ГўГ»Г·ГЁГІГ Г­ГЁГҐ ГўГҐГЄГІГ®Г°Г®Гў
 		Vector temp(*this);
 		temp -= a;
 		//cout << temp << endl;
 		return temp;
 	}
-	Vector& operator*=(const Vector& a) { //*this это наш переданный темп, а а соотвтвествеенно как аргумент а
-		if (_size != a._size) throw logic_error("Невозможжно умножить векторы разной длины");
+	Vector& operator*=(const Vector& a) { //*this ГЅГІГ® Г­Г Гё ГЇГҐГ°ГҐГ¤Г Г­Г­Г»Г© ГІГҐГ¬ГЇ, Г  Г  Г±Г®Г®ГІГўГІГўГҐГ±ГІГўГҐГҐГ­Г­Г® ГЄГ ГЄ Г Г°ГЈГіГ¬ГҐГ­ГІ Г 
+		if (_size != a._size) throw logic_error("ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® ГіГ¬Г­Г®Г¦ГЁГІГј ГўГҐГЄГІГ®Г°Г» Г°Г Г§Г­Г®Г© Г¤Г«ГЁГ­Г»");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] *= a.data[i];
 		}
 		return *this;
 	}
-	T operator*(const Vector& a) const { // скалярное умножение ВЕКТОРОВ
+	T operator*(const Vector& a) const { // Г±ГЄГ Г«ГїГ°Г­Г®ГҐ ГіГ¬Г­Г®Г¦ГҐГ­ГЁГҐ Г‚Г…ГЉГ’ГЋГђГЋГ‚
 		Vector temp(*this);
 		temp *= a;
 		//cout << temp << endl;
@@ -163,7 +164,7 @@ public:
 		}
 		return scalar;
 	}
-	Vector& operator*=(const T a) { // ВЕКТОР на число
+	Vector& operator*=(const T a) { // Г‚Г…ГЉГ’ГЋГђ Г­Г  Г·ГЁГ±Г«Г®
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] *= a;
@@ -176,18 +177,18 @@ public:
 		//cout << temp << endl;
 		return temp;
 	}
-	friend Vector operator*(const T b, const Vector& a) { // Число на вектор
+	friend Vector operator*(const T b, const Vector& a) { // Г—ГЁГ±Г«Г® Г­Г  ГўГҐГЄГІГ®Г°
 		Vector temp(a);
 		temp *= b;
 		//cout << temp << endl;
 		return temp;
 	}
 
-	/*Vector& operator/=(const Vector& a) { //*this это наш переданный темп, а а соотвтвествеенно как аргумент а
-		if (_size != a._size) throw "Невозможжно разделить векторы";
+	/*Vector& operator/=(const Vector& a) { //*this ГЅГІГ® Г­Г Гё ГЇГҐГ°ГҐГ¤Г Г­Г­Г»Г© ГІГҐГ¬ГЇ, Г  Г  Г±Г®Г®ГІГўГІГўГҐГ±ГІГўГҐГҐГ­Г­Г® ГЄГ ГЄ Г Г°ГЈГіГ¬ГҐГ­ГІ Г 
+		if (_size != a._size) throw "ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® Г°Г Г§Г¤ГҐГ«ГЁГІГј ГўГҐГЄГІГ®Г°Г»";
 		for (size_t i = 0; i < _size; i++)
 		{
-			if (a.data[i] == 0) throw "нельзя делить на ноль";
+			if (a.data[i] == 0) throw "Г­ГҐГ«ГјГ§Гї Г¤ГҐГ«ГЁГІГј Г­Г  Г­Г®Г«Гј";
 			data[i] /= a.data[i];
 		}
 		return *this;
@@ -199,8 +200,8 @@ public:
 		return temp;
 	}
 	*/
-	Vector& operator/=(const T a) { //*this это наш переданный темп, а а соотвтвествеенно как аргумент а
-		if (a == 0) throw logic_error("Невозможжно делить на 0");
+	Vector& operator/=(const T a) { //*this ГЅГІГ® Г­Г Гё ГЇГҐГ°ГҐГ¤Г Г­Г­Г»Г© ГІГҐГ¬ГЇ, Г  Г  Г±Г®Г®ГІГўГІГўГҐГ±ГІГўГҐГҐГ­Г­Г® ГЄГ ГЄ Г Г°ГЈГіГ¬ГҐГ­ГІ Г 
+		if (a == 0) throw logic_error("ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® Г¤ГҐГ«ГЁГІГј Г­Г  0");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] /= a;
@@ -213,13 +214,13 @@ public:
 		//cout << temp << endl;
 		return temp;
 	}
-	static T square(Vector& a, Vector& b)// вычисление площади треугольника черзе 2 вектора
+	static T square(Vector& a, Vector& b)// ГўГ»Г·ГЁГ±Г«ГҐГ­ГЁГҐ ГЇГ«Г®Г№Г Г¤ГЁ ГІГ°ГҐГіГЈГ®Г«ГјГ­ГЁГЄГ  Г·ГҐГ°Г§ГҐ 2 ГўГҐГЄГІГ®Г°Г 
 	{
 		return 0.5 * sin(a, b) * length(a, b);
 	}
-	static T sin(Vector a, Vector b) //вычесление синуса для площади
+	static T sin(Vector a, Vector b) //ГўГ»Г·ГҐГ±Г«ГҐГ­ГЁГҐ Г±ГЁГ­ГіГ±Г  Г¤Г«Гї ГЇГ«Г®Г№Г Г¤ГЁ
 	{
-		if (a._size != b._size) throw logic_error("Невозможжно вычислить синус между векторами разной размерности");
+		if (a._size != b._size) throw logic_error("ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® ГўГ»Г·ГЁГ±Г«ГЁГІГј Г±ГЁГ­ГіГ± Г¬ГҐГ¦Г¤Гі ГўГҐГЄГІГ®Г°Г Г¬ГЁ Г°Г Г§Г­Г®Г© Г°Г Г§Г¬ГҐГ°Г­Г®Г±ГІГЁ");
 		T chislitel = 0;
 		T temp = 0, tmp = 0;
 		T znamenatel = 1;
@@ -238,7 +239,7 @@ public:
 		znamenatel = temp * tmp;
 		return sqrt(1 - pow((chislitel / znamenatel), 2));
 	}
-	static T length(Vector a, Vector b) //вычесление произведения длин векторов
+	static T length(Vector a, Vector b) //ГўГ»Г·ГҐГ±Г«ГҐГ­ГЁГҐ ГЇГ°Г®ГЁГ§ГўГҐГ¤ГҐГ­ГЁГї Г¤Г«ГЁГ­ ГўГҐГЄГІГ®Г°Г®Гў
 	{
 		T temp = 0;
 		T tmp = 0;
@@ -260,35 +261,35 @@ private:
 	int _size;
 	complex<V> epsilon;
 public:
-	Vector() { //конструктор по умолчаниюю
+	Vector() { //ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕГѕ
 		srand(time(0));
 		_size = rand() % 3 + 10;
 		epsilon = complex<V>(0.0001, 0.00001);
 		data = new complex<V>[_size];
 		for (size_t i = 0; i < _size; i++)
 		{
-			data[i] = complex<V>((V)rand() /3, (V)rand() /4);
+			data[i] = complex<V>((V)rand() / 3, (V)rand() / 4);
 		}
 
 	}
 
-	Vector(int size, complex<V> eps) { // конструктор с параметром
-		if (size < 1) throw invalid_argument("Недопустимое значение");
+	Vector(int size, complex<V> eps) { // ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° Г± ГЇГ Г°Г Г¬ГҐГІГ°Г®Г¬
+		if (size < 1) throw invalid_argument("ГЌГҐГ¤Г®ГЇГіГ±ГІГЁГ¬Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ");
 		_size = size;
 		data = new complex<V>[size];
-		cout << "Введите значения:\n";
-		V a=0, b=0;
+		cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г§Г­Г Г·ГҐГ­ГЁГї:\n";
+		V a = 0, b = 0;
 		for (size_t i = 0; i < size; i++)
 		{
-			cout << "Вводите сначала действительную часть";
+			cout << "Г‚ГўГ®Г¤ГЁГІГҐ Г±Г­Г Г·Г Г«Г  Г¤ГҐГ©Г±ГІГўГЁГІГҐГ«ГјГ­ГіГѕ Г·Г Г±ГІГј";
 			cin >> a;
-			cout << "Вводите мнимую часть";
+			cout << "Г‚ГўГ®Г¤ГЁГІГҐ Г¬Г­ГЁГ¬ГіГѕ Г·Г Г±ГІГј";
 			cin >> b;
-			data[i] = complex<V>(a,b);
-			
+			data[i] = complex<V>(a, b);
+
 		}
 	}
-	Vector(const Vector<complex<V>>& a) { // конструктор копирования
+	Vector(const Vector<complex<V>>& a) { // ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЄГ®ГЇГЁГ°Г®ГўГ Г­ГЁГї
 		data = new complex<V>[a._size];
 		_size = a._size;
 		epsilon = a.epsilon;
@@ -298,7 +299,7 @@ public:
 		}
 	}
 	~Vector() { delete[] data; }
-	friend ostream& operator<<(ostream& os, const Vector<complex<V>>& a) //вывод
+	friend ostream& operator<<(ostream& os, const Vector<complex<V>>& a) //ГўГ»ГўГ®Г¤
 	{
 		for (int i = 0; i < a._size; ++i)
 		{
@@ -307,7 +308,7 @@ public:
 		return os;
 	}
 	int Get_size() { return _size; }
-	complex<V> operator[](int i) const { //ЧТение и запись
+	complex<V> operator[](int i) const { //Г—Г’ГҐГ­ГЁГҐ ГЁ Г§Г ГЇГЁГ±Гј
 		if (i<0 or i>_size) throw out_of_range("Invalid index");
 		return data[i];
 	}
@@ -317,14 +318,18 @@ public:
 		return data[i];
 	}
 
-	bool operator==(const Vector<complex<V>>& a) {				//Операторы сравнения
+	bool operator==(const Vector<complex<V>>& a) {				//ГЋГЇГҐГ°Г ГІГ®Г°Г» Г±Г°Г ГўГ­ГҐГ­ГЁГї
 		if (_size != a._size) {
 			return false;
 		}
 		else {
 			for (size_t i = 0; i < _size; i++)
 			{
-				if ((data[i] - a.data[i]) > epsilon) {
+				if ((data[i].real() - a.data[i].real()) > epsilon.real()) {
+
+					return false;
+				}
+				if ((data[i].imag() - a.data[i].imag()) > epsilon.imag()) {
 
 					return false;
 				}
@@ -342,8 +347,8 @@ public:
 		return *this;
 	}
 
-	Vector<complex<V>>& operator+=(const Vector<complex<V>>& a) {		//Сложение векторов
-		if (_size != a._size) throw logic_error("Невозможжно сложить векторы разной длины");
+	Vector<complex<V>>& operator+=(const Vector<complex<V>>& a) {		//Г‘Г«Г®Г¦ГҐГ­ГЁГҐ ГўГҐГЄГІГ®Г°Г®Гў
+		if (_size != a._size) throw logic_error("ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® Г±Г«Г®Г¦ГЁГІГј ГўГҐГЄГІГ®Г°Г» Г°Г Г§Г­Г®Г© Г¤Г«ГЁГ­Г»");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] += a.data[i];
@@ -358,28 +363,28 @@ public:
 		return tmp;
 	}
 	Vector<complex<V>>& operator-=(const Vector<complex<V>>& a) {
-		if (_size != a._size) throw logic_error("Невозможжно вычесть векторы разной длины");
+		if (_size != a._size) throw logic_error("ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® ГўГ»Г·ГҐГ±ГІГј ГўГҐГЄГІГ®Г°Г» Г°Г Г§Г­Г®Г© Г¤Г«ГЁГ­Г»");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] -= a.data[i];
 		}
 		return *this;
 	}
-	Vector<complex<V>> operator-(const Vector<complex<V>>& a) const { //вычитание векторов
+	Vector<complex<V>> operator-(const Vector<complex<V>>& a) const { //ГўГ»Г·ГЁГІГ Г­ГЁГҐ ГўГҐГЄГІГ®Г°Г®Гў
 		Vector temp(*this);
 		temp -= a;
 		//cout << temp << endl;
 		return temp;
 	}
-	Vector<complex<V>>& operator*=(const Vector<complex<V>>& a) { //*this это наш переданный темп, а а соотвтвествеенно как аргумент а
-		if (_size != a._size) throw logic_error("Невозможжно умножить векторы разной длины");
+	Vector<complex<V>>& operator*=(const Vector<complex<V>>& a) { //*this ГЅГІГ® Г­Г Гё ГЇГҐГ°ГҐГ¤Г Г­Г­Г»Г© ГІГҐГ¬ГЇ, Г  Г  Г±Г®Г®ГІГўГІГўГҐГ±ГІГўГҐГҐГ­Г­Г® ГЄГ ГЄ Г Г°ГЈГіГ¬ГҐГ­ГІ Г 
+		if (_size != a._size) throw logic_error("ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® ГіГ¬Г­Г®Г¦ГЁГІГј ГўГҐГЄГІГ®Г°Г» Г°Г Г§Г­Г®Г© Г¤Г«ГЁГ­Г»");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] *= a.data[i];
 		}
 		return *this;
 	}
-	complex<V> operator*(const Vector<complex<V>>& a) const { // скалярное умножение ВЕКТОРОВ
+	complex<V> operator*(const Vector<complex<V>>& a) const { // Г±ГЄГ Г«ГїГ°Г­Г®ГҐ ГіГ¬Г­Г®Г¦ГҐГ­ГЁГҐ Г‚Г…ГЉГ’ГЋГђГЋГ‚
 		Vector <complex<V>>temp(*this);
 		//cout << temp << endl;
 		temp *= a;
@@ -390,7 +395,7 @@ public:
 		}
 		return scalar;
 	}
-	Vector<complex<V>>& operator*=(const complex<V> a) { // ВЕКТОР на число
+	Vector<complex<V>>& operator*=(const complex<V> a) { // Г‚Г…ГЉГ’ГЋГђ Г­Г  Г·ГЁГ±Г«Г®
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] *= a;
@@ -403,14 +408,14 @@ public:
 		//cout << temp << endl;
 		return temp;
 	}
-	friend Vector<complex<V>> operator*(const complex<V> b, const Vector<complex<V>>& a) { // Число на вектор
+	friend Vector<complex<V>> operator*(const complex<V> b, const Vector<complex<V>>& a) { // Г—ГЁГ±Г«Г® Г­Г  ГўГҐГЄГІГ®Г°
 		Vector <complex<V>>temp(a);
 		temp *= b;
 		//cout << temp << endl;
 		return temp;
 	}
-	Vector<complex<V>>& operator/=(const complex<V> a) { //*this это наш переданный темп, а а соотвтвествеенно как аргумент а
-		//if (a.real == 0 && a.imag==0) throw "Невозможжно разделить векторы";
+	Vector<complex<V>>& operator/=(const complex<V> a) { //*this ГЅГІГ® Г­Г Гё ГЇГҐГ°ГҐГ¤Г Г­Г­Г»Г© ГІГҐГ¬ГЇ, Г  Г  Г±Г®Г®ГІГўГІГўГҐГ±ГІГўГҐГҐГ­Г­Г® ГЄГ ГЄ Г Г°ГЈГіГ¬ГҐГ­ГІ Г 
+		//if (a.real == 0 && a.imag==0) throw "ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® Г°Г Г§Г¤ГҐГ«ГЁГІГј ГўГҐГЄГІГ®Г°Г»";
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] /= a;
@@ -423,18 +428,18 @@ public:
 		//cout << temp << endl;
 		return temp;
 	}
-	static complex<V> square(Vector<complex<V>> &a, Vector<complex<V>> &b)// вычисление площади треугольника черзе 2 вектора
-	{ 
+	static complex<V> square(Vector<complex<V>>& a, Vector<complex<V>>& b)// ГўГ»Г·ГЁГ±Г«ГҐГ­ГЁГҐ ГЇГ«Г®Г№Г Г¤ГЁ ГІГ°ГҐГіГЈГ®Г«ГјГ­ГЁГЄГ  Г·ГҐГ°Г§ГҐ 2 ГўГҐГЄГІГ®Г°Г 
+	{
 		complex<V> x(0.5, 0);
 		return x * sin(a, b) * length(a, b);
 	}
-	static complex<V> sin(Vector<complex<V>> a, Vector<complex<V>> b) //вычесление синуса для площади
+	static complex<V> sin(Vector<complex<V>> a, Vector<complex<V>> b) //ГўГ»Г·ГҐГ±Г«ГҐГ­ГЁГҐ Г±ГЁГ­ГіГ±Г  Г¤Г«Гї ГЇГ«Г®Г№Г Г¤ГЁ
 	{
-		if (a._size != b._size) throw logic_error("Невозможжно вычислить синус между векторами разной размерности");
+		if (a._size != b._size) throw logic_error("ГЌГҐГўГ®Г§Г¬Г®Г¦Г¦Г­Г® ГўГ»Г·ГЁГ±Г«ГЁГІГј Г±ГЁГ­ГіГ± Г¬ГҐГ¦Г¤Гі ГўГҐГЄГІГ®Г°Г Г¬ГЁ Г°Г Г§Г­Г®Г© Г°Г Г§Г¬ГҐГ°Г­Г®Г±ГІГЁ");
 		complex<V> numerator(0, 0);
 		complex<V> temp(0, 0);
-		complex<V> tmp(0,0);
-		complex<V> denominator(1,0);
+		complex<V> tmp(0, 0);
+		complex<V> denominator(1, 0);
 		//for (size_t i = 0; i < a._size; i++)
 		//{
 		numerator = a * b;
@@ -452,7 +457,7 @@ public:
 		complex<V> q(2, 0);
 		return sqrt(w - pow(numerator / denominator, q));
 	}
-	static complex<V> length(Vector<complex<V>> a, Vector<complex<V>> b) //вычесление произведения длин векторов
+	static complex<V> length(Vector<complex<V>> a, Vector<complex<V>> b) //ГўГ»Г·ГҐГ±Г«ГҐГ­ГЁГҐ ГЇГ°Г®ГЁГ§ГўГҐГ¤ГҐГ­ГЁГї Г¤Г«ГЁГ­ ГўГҐГЄГІГ®Г°Г®Гў
 	{
 		complex<V> temp(0, 0);
 		complex<V> tmp(0, 0);
