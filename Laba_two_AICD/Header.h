@@ -16,7 +16,7 @@ private:
 	T epsilon;
 public:
 
-	Vector<T>() { //êîíñòðóêòîð ïî óìîë÷àíèþþ
+	Vector<T>() { //конструктор по умолчаниюю
 		srand(time(0));
 		_size = rand() % 3 + 10;
 		epsilon = 0, 000001;
@@ -28,25 +28,25 @@ public:
 
 	}
 
-	Vector(int size, T eps) { // êîíñòðóêòîð ñ ïàðàìåòðîì
-		if (size < 1) throw invalid_argument("Íåäîïóñòèìîå çíà÷åíèå");
+	Vector(int size, T eps) { // конструктор с параметром
+		if (size < 1) throw invalid_argument("Недопустимое значение");
 		_size = size;
 		epsilon = abs(eps);
-		data = new T[size];
-		cout << "Ââåäèòå çíà÷åíèÿ:\n";
+		data = new T[_size];
+		cout << "Введите значение:\n";
 		T a;
-		for (size_t i = 0; i < size; i++)
+		for (size_t i = 0; i < _size; i++)
 		{
 			cout << "A[" << i << "] = ";
 			cin >> a;
 			data[i] = a;
 		}
 	}
-	Vector(const Vector& a) { // êîíñòðóêòîð êîïèðîâàíèÿ
-		data = new T[a._size];
+	Vector(const Vector& a) { // конструктор копирования
 		_size = a._size;
+		data = new T[_size];
 		epsilon = a.epsilon;
-		for (size_t i = 0; i < a._size; i++)
+		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] = a.data[i];
 		}
@@ -71,15 +71,15 @@ public:
 		}
 	*/
 	T operator[](int i) const { //×Òåíèå è çàïèñü
-		if (i<0 or i>_size) throw out_of_range("Íåäîïóñòèìîå çíà÷åíèå");
+		if (i<0 or i>_size) throw out_of_range("Недопустимое значение");
 		return data[i];
 	}
 
 	T& operator[](int i) {
-		if (i<0 or i>_size)  throw out_of_range("Íåäîïóñòèìîå çíà÷åíèå");
+		if (i<0 or i>_size)  throw out_of_range("Недопустимое значение");
 		return data[i];
 	}
-	friend ostream& operator<<(ostream& os, const Vector& a) //âûâîä
+	friend ostream& operator<<(ostream& os, const Vector& a) 
 	{
 		for (int i = 0; i < a._size; ++i)
 		{
@@ -87,7 +87,7 @@ public:
 		}
 		return os;
 	}
-	bool operator==(const Vector& a) {				//Îïåðàòîðû ñðàâíåíèÿ
+	bool operator==(const Vector& a) {				
 		if (_size != a._size) {
 			return false;
 		}
@@ -116,8 +116,8 @@ public:
 		}
 		return *this;
 	}
-	Vector& operator+=(const Vector& a) {		//Ñëîæåíèå âåêòîðîâ
-		if (_size != a._size) throw logic_error("Íåâîçìîææíî ñëîæèòü âåêòîðû ðàçíîé äëèíû");
+	Vector& operator+=(const Vector& a) {		//сложение векторов
+		if (_size != a._size) throw logic_error("Невозможжно сложить векторы разной длины");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] += a.data[i];
@@ -132,28 +132,28 @@ public:
 		return tmp;
 	}
 	Vector& operator-=(const Vector& a) {
-		if (_size != a._size) throw logic_error("Íåâîçìîææíî âû÷åñòü âåêòîðû ðàçíîé äëèíû");
+		if (_size != a._size) throw logic_error("Невозможжно вычесть векторы разной длины");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] -= a.data[i];
 		}
 		return *this;
 	}
-	Vector operator-(const Vector& a) const { //âû÷èòàíèå âåêòîðîâ
+	Vector operator-(const Vector& a) const { //вычитание векторов
 		Vector temp(*this);
 		temp -= a;
 		//cout << temp << endl;
 		return temp;
 	}
-	Vector& operator*=(const Vector& a) { //*this ýòî íàø ïåðåäàííûé òåìï, à à ñîîòâòâåñòâååííî êàê àðãóìåíò à
-		if (_size != a._size) throw logic_error("Íåâîçìîææíî óìíîæèòü âåêòîðû ðàçíîé äëèíû");
+	Vector& operator*=(const Vector& a) { //*this это наш переданный темп, а а соотвтвествеенно как аргумент а
+		if (_size != a._size) throw logic_error("Невозможжно умн векторы разной длины");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] *= a.data[i];
 		}
 		return *this;
 	}
-	T operator*(const Vector& a) const { // ñêàëÿðíîå óìíîæåíèå ÂÅÊÒÎÐÎÂ
+	T operator*(const Vector& a) const { // скалярное
 		Vector temp(*this);
 		temp *= a;
 		//cout << temp << endl;
@@ -164,7 +164,7 @@ public:
 		}
 		return scalar;
 	}
-	Vector& operator*=(const T a) { // ÂÅÊÒÎÐ íà ÷èñëî
+	Vector& operator*=(const T a) { // Вектор на число
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] *= a;
@@ -177,7 +177,7 @@ public:
 		//cout << temp << endl;
 		return temp;
 	}
-	friend Vector operator*(const T b, const Vector& a) { // ×èñëî íà âåêòîð
+	friend Vector operator*(const T b, const Vector& a) { // число на вектор
 		Vector temp(a);
 		temp *= b;
 		//cout << temp << endl;
@@ -200,8 +200,8 @@ public:
 		return temp;
 	}
 	*/
-	Vector& operator/=(const T a) { //*this ýòî íàø ïåðåäàííûé òåìï, à à ñîîòâòâåñòâååííî êàê àðãóìåíò à
-		if (a == 0) throw logic_error("Íåâîçìîææíî äåëèòü íà 0");
+	Vector& operator/=(const T a) { 
+		if (a == 0) throw logic_error("Невозможно делит 0");
 		for (size_t i = 0; i < _size; i++)
 		{
 			data[i] /= a;
