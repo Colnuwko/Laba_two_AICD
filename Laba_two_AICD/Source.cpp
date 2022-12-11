@@ -37,6 +37,278 @@ void menu_3()
 	cout << "9. Просмотреть элемент вектора" << endl;
 	cout << "esc -  выход" << endl;
 }
+template <class T>
+void Nomain()
+{
+	Vector <T>A;
+	Vector <T>B;
+	cout << "Хорошо продолжим.." << endl;
+	int key = 0;
+	while (key != 27)
+	{ 
+		menu_2();
+		key = _getch();
+		switch (key)
+		{
+		case 49:
+		{
+			Vector<T> b;
+			B = b;
+			cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
+
+			//goto random;
+			_getch();
+			key = 27;
+			break;
+		}
+		case 50:
+		{
+			system("cls");
+			cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
+			int size_one;
+			int size_two;
+			double epsilon;
+			cin >> size_one;
+			cout << "А теперь введем размерность 2 вектора" << endl;
+			cin >> size_two;
+			cout << "Замечательно, а теперь введите точность сравнения" << endl;
+			cin >> epsilon;
+			cout << "Самое время заполнить вектора" << endl;
+			Vector <T>a(size_one, epsilon);
+			cout << endl << "Остался последний вектор" << endl;
+			Vector <T>b(size_two, epsilon);
+			A = a;
+			B = b;
+			cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
+			//goto Par;
+			_getch();
+			key = 27;
+			break;
+		}
+		case 51:
+		{
+			system("cls");
+			cout << "1. Создать два моих собственных вектора" << endl << "2. Создать два одинаковых и рандомных вектора" << endl;
+			key = _getch();
+			switch (key)
+			{
+			case 49:
+			{
+				int size;
+				int epsilon;
+				cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
+				cin >> size;
+				cout << "Замечательно, а теперь введите точность сравнения" << endl;
+				cin >> epsilon;
+				cout << "Самое время заполнить вектора" << endl;
+				Vector <T>a(size, epsilon);
+				A = a;
+				B = a;
+				cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
+				//goto My_copy;
+				_getch();
+				key = 27;
+				break;
+			}
+			case 50:
+			{
+				B = A;
+				cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
+
+				//goto random_copy;
+				_getch();
+				key = 27;
+				break;
+			}
+			}
+			_getch();
+			break;
+		}
+		}
+
+	}
+	key = 0;
+	while (key != 27)
+	{
+		menu_3();
+		cout << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
+		key = _getch();
+		Vector <T>res;
+		switch (key)
+		{
+		case 49:
+		{
+
+			res = A + B;
+			cout << "A + B = " << res << endl;
+			_getch();
+			break;
+		}
+		case 50:
+		{
+			while (key != 0) {
+				cout << "Шо вычитаем?" << endl << "1. A - B" << endl << "2. B - A" << endl;
+
+
+				key = _getch();
+				if (key == 49) { res = A - B; cout << "A - B = " << res << endl; key = 0; }
+
+				else {
+					if (key == 50) { res = B - A; cout << "B - A = " << res << endl;  key = 0; }
+					else { cout << "тут только два выбора! :)" << endl; }
+				}
+			}
+			_getch();
+			break;
+		}
+		case 51:
+		{
+			T x = A * B;
+			cout << "A * B = " << x << endl;
+			_getch();
+			break;
+		}
+		case 52:
+		{
+			T x;
+			cout << "Введите делитель" << endl;
+			cin >> x;
+			while (key != 0) {
+				cout << "Что делим?" << endl << "1. A / x" << endl << "2. B / x" << endl;
+
+
+				key = _getch();
+				if (key == 49) {
+					res = A / x; cout << "A / x = " << res << endl; key = 0;
+				}
+
+				else {
+					if (key == 50) {
+						res = B / x; cout << "B / x = " << res << endl; key = 0;
+					}
+					else { cout << "тут только два выбора! :)" << endl; }
+				}
+			}
+			_getch();
+			break;
+		}
+		case 53:
+		{
+			T x;
+			cout << "Введите множитель" << endl;
+			cin >> x;
+			while (key != 0) {
+				cout << "Что на что умножаем?" << endl << "1. A * x" << endl << "2. x * B" << endl;
+
+
+				key = _getch();
+				if (key == 49) {
+					res = A * x; cout << "A * x = " << res << endl; key = 0;
+				}
+
+				else {
+					if (key == 50) {
+						res = x * B; cout << "x * B = " << res << endl; key = 0;
+					}
+					else { cout << "тут только два выбора! :)" << endl; }
+				}
+			}
+			_getch();
+			break;
+		}
+		case 54:
+		{
+			T x;
+			x = B.square(A, B);
+			cout << "Площадь = " << x << endl;
+			_getch();
+			break;
+		}
+		case 55:
+		{
+			if (A == B) cout << A << "==" << B << endl;
+			else cout << A << "!=" << B << endl;
+			_getch();
+			break;
+		}
+		case 56:
+		{
+
+			cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
+			int y;
+			int x;
+			y = _getch() - 48;
+			if (y == 1)
+			{
+				cout << "Выберите элемент" << A << endl;
+				cin >> x;
+				T temp = A[x];
+				cout << "Введите новое значение" << endl;
+				cin >> A[x];
+				cout << "предыдущее значение: " << temp << "изменено на " << A[x] << endl;
+
+			}
+			else
+			{
+				if (y == 2)
+				{
+					cout << "Выберите элемент" << B << endl;
+					cin >> x;
+					T temp = B[x];
+					cout << "Введите новое значение" << endl;
+					cin >> B[x];
+					cout << "предыдущее значение: " << temp << "изменено на " << B[x] << endl;
+				}
+				else
+				{
+					cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
+					_getch();
+
+				}
+			}
+
+			_getch();
+			break;
+		}
+		case 57:
+		{
+			system("cls");
+			cout << "1. Просмотреть значения вектора 1" << endl << "2. Просмотреть значения вектора 2" << endl;
+			int x;
+			cin >> x;
+			if (x == 1)
+			{
+				cout << A << endl << "какое число вы хотите лицезреть??" << endl;
+				cin >> x;
+				cout << A[x];
+				_getch();
+
+			}
+			else
+			{
+				if (x == 2)
+				{
+					cout << B << endl << "какое число вы хотите лицезреть??" << endl;
+					cin >> x;
+					cout << B[x];
+					_getch();
+
+				}
+				else {
+					cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
+					_getch();
+
+				}
+			}
+		}
+		case 27:
+		{
+			system("cls");
+			break;
+		}
+		}
+	}
+}
 int get_key()
 {
 	int key;
@@ -65,1380 +337,32 @@ int main()
 				{
 				case 49:
 				{
-					Vector <int>A;
-					Vector <int>B;
-					cout << "Хорошо продолжим.." << endl;
-					int key = 0;
-					while (key != 27)
-					{
-						key = get_key();
-						menu_2();
-						switch (key)
-						{
-						case 49:
-						{
-							Vector<int> b;
-							B=b; 
-							cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-							//goto random;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 50:
-						{
-							system("cls");
-							cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
-							int size_one;
-							int size_two;
-							double epsilon;
-							cin >> size_one;
-							cout << "А теперь введем размерность 2 вектора"<<endl;
-							cin >> size_two;
-							cout << "Замечательно, а теперь введите точность сравнения" << endl;
-							cin >> epsilon;
-							cout << "Самое время заполнить вектора" << endl;
-							Vector <int>a(size_one, epsilon);
-							cout << endl << "Остался последний вектор" << endl;
-							Vector <int>b(size_two, epsilon);
-							A = a;
-							B = b;
-							cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;	
-							//goto Par;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 51:
-						{
-							system("cls");
-							cout << "1. Создать два моих собственных вектора" << endl << "2. Создать два одинаковых и рандомных вектора" << endl;
-							key = get_key();
-							switch (key)
-							{
-							case 49:
-							{
-								int epsilon;
-								cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-								cin >> size;
-								cout << "Замечательно, а теперь введите точность сравнения" << endl;
-								cin >> epsilon;
-								cout << "Самое время заполнить вектора" << endl;
-								Vector <int>a(size, epsilon);
-								A = a;
-								B = a;
-								cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-								//goto My_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							case 50:
-							{
-								B = A;
-								cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-								//goto random_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							}
-							_getch();
-							break;
-						}
-						}
-
-					}
-					key = 0;
-					while (key != 27)
-					{
-						menu_3();
-						cout << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-						key = get_key();
-						Vector <int>res;
-						switch (key)
-						{
-						case 49:
-						{
-
-							res = A + B;
-							cout << "A + B = " << res << endl;
-							_getch();
-							break;
-						}
-						case 50:
-						{
-							while (key != 0) {
-								cout << "Шо вычитаем?" << endl << "1. A - B" << endl << "2. B - A" << endl;
-
-
-								key = get_key();
-								if (key == 49) { res = A - B; cout << "A - B = " << res << endl; key = 0; }
-
-								else {
-									if (key == 50) { res = B - A; cout << "B - A = " << res << endl;  key = 0; }
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 51:
-						{
-							double x = A * B;
-							cout << "A * B = " << x << endl;
-							_getch();
-							break;
-						}
-						case 52:
-						{
-							double x;
-							cout << "Введите делитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что делим?" << endl << "1. A / x" << endl << "2. B / x" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A / x; cout << "A / x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = B / x; cout << "B / x = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 53:
-						{
-							double x;
-							cout << "Введите множитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что на что умножаем?" << endl << "1. A * x" << endl << "2. x * B" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A * x; cout << "A * x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = x * B; cout << "x * B = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 54:
-						{
-							int x;
-							x = B.square(A, B);
-							cout << "Площадь = " << x << endl;
-							_getch();
-							break;
-						}
-						case 55:
-						{
-							if (A == B) cout << A << "==" << B << endl;
-							else cout << A << "!=" << B << endl;
-							_getch();
-							break;
-						}
-						case 56:
-						{
-						
-							cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
-							int x;
-							x=get_key()-48;
-							if (x == 1)
-							{
-								cout <<"Выберите элемент" << A<<endl;
-								cin >> x;
-									int temp = A[x];
-									cout << "Введите новое значение" << endl;
-									cin >> A[x];
-									cout << "предыдущее значение: " << temp << "изменено на " << A[x] << endl;
-								
-							}
-							else 
-							{
-								if (x == 2)
-								{
-									cout << "Выберите элемент" << B<<endl;
-									cin >> x;
-										int temp = B[x];
-										cout << "Введите новое значение"<<endl;
-										cin >> B[x];
-										cout << "предыдущее значение: " << temp << "изменено на " << B[x] << endl;
-								}
-								else
-								{
-									cout <<"У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-									
-								}
-							}
-
-							_getch();
-							break;
-						}
-						case 57:
-						{
-							system("cls");
-							cout << "1. Просмотреть значения вектора 1" << endl << "2. Просмотреть значения вектора 2" << endl;
-							int x;
-							cin >> x;
-							if (x == 1)
-							{
-								cout << A << endl << "какое число вы хотите лицезреть??" << endl;
-								cin >> x;
-								cout << A[x];
-								_getch();
-
-							}
-							else
-							{
-								if (x == 2)
-								{
-									cout << B << endl << "какое число вы хотите лицезреть??" << endl;
-									cin >> x;
-									cout << B[x];
-									_getch();
-
-								}
-								else {
-									cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-
-								}
-							}
-						}
-						case 27:
-						{
-							system("cls");
-							break;
-						}
-						}
-					}
+					Nomain<int>();
 					_getch();
 					break;
 				}
 
 				case 50:
 				{
-					Vector <double>A;
-					Vector <double>B;
-					cout << "Хорошо продолжим.." << endl;
-					int key = 0;
-					while (key != 27)
-					{
-						key = get_key();
-						menu_2();
-						switch (key)
-						{
-						case 49:
-						{
-							Vector<double> b;
-							B = b;
-							cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-							//goto random;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 50:
-						{
-							system("cls");
-							cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
-							int size_one, size_two;
-							double epsilon;
-							cin >> size_one;
-							cout << "А теперь введем размерность 2 вектора" << endl;
-							cin >> size_two;
-							cout << "Замечательно, а теперь введите точность сравнения" << endl;
-							cin >> epsilon;
-							cout << "Самое время заполнить вектора" << endl;
-							Vector <double>a(size_one, epsilon);
-							cout << endl << "Остался последний вектор" << endl;
-							Vector <double>b(size_two, epsilon);
-							A = a;
-							B = b;
-							cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-							//goto Par;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 51:
-						{
-							system("cls");
-							cout << "1. Создать два моих собственных вектора" << endl << "2. Создать два одинаковых и рандомных вектора" << endl;
-							key = get_key();
-							switch (key)
-							{
-							case 49:
-							{
-								double epsilon;
-								cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-								cin >> size;
-								cout << "Замечательно, а теперь введите точность сравнения" << endl;
-								cin >> epsilon;
-								cout << "Самое время заполнить вектора" << endl;
-								Vector <double>a(size, epsilon);
-								A = a;
-								B = a;
-								cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-								//goto My_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							case 50:
-							{
-								B = A;
-								cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-								//goto random_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							}
-							_getch();
-							break;
-						}
-						}
-
-					}//
-					key = 0;
-					while (key != 27)
-					{
-						menu_3();
-						cout << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-						key = get_key();
-						Vector <double>res;
-						switch (key)
-						{
-						case 49:
-						{
-							res = A + B;
-							cout << "A + B = " << res << endl;
-							_getch();
-							break;
-						}
-						case 50:
-						{
-							while (key != 0) {
-								cout << "Шо вычитаем?" << endl << "1. A - B" << endl << "2. B - A" << endl;
-
-
-								key = get_key();
-								if (key == 49) { res = A - B; cout << "A - B = " << res << endl; key = 0; }
-
-								else {
-									if (key == 50) { res = B - A; cout << "B - A = " << res << endl;  key = 0; }
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 51:
-						{
-							double x = A * B;
-							cout << "A * B = " << x << endl;
-							_getch();
-							break;
-						}
-						case 52:
-						{
-							double x;
-							cout << "Введите делитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что делим?" << endl << "1. A / x" << endl << "2. B / x" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A / x; cout << "A / x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = B / x; cout << "B / x = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 53:
-						{
-							double x;
-							cout << "Введите множитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что на что умножаем?" << endl << "1. A * x" << endl << "2. x * B" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A * x; cout << "A * x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = x * B; cout << "x * B = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 54:
-						{
-							int x;
-							x = B.square(A, B);
-							cout << "Площадь = " << x << endl;
-							_getch();
-							break;
-						}
-						case 55:
-						{
-							if (A == B) cout << A << "==" << B << endl;
-							else cout << A << "!=" << B << endl;
-							_getch();
-							break;
-						}
-						case 56:
-						{
-							cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
-							int x;
-							x = get_key() - 48;
-							if (x == 1)
-							{
-
-								cout << "Выберите элемент" << A << endl;
-								cin >> x;
-									double temp = A[x];
-									cout << "Введите новое значение" << endl;
-									cin >> A[x];
-									cout << "предыдущее значение: " << temp << "изменено на " << A[x] << endl;
-							}
-							else
-							{
-								if (x == 2)
-								{
-									cout << "Выберите элемент" << B << endl;
-									cin >> x;
-										double temp = B[x];
-										cout << "Введите новое значение" << endl;
-										cin >> B[x];
-										cout << "предыдущее значение: " << temp << "изменено на " << B[x] << endl;
-
-									
-								}
-								else
-								{
-									cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-								}
-							}
-
-							_getch();
-							break;
-						}
-						case 57:
-						{
-							system("cls");
-							cout << "1. Просмотреть значения вектора 1" << endl << "2. Просмотреть значения вектора 2" << endl;
-							int x;
-							cin >> x;
-							if (x == 1)
-							{
-								cout << A << endl << "какое число вы хотите лицезреть??" << endl;
-								cin >> x;
-								cout << A[x];
-								_getch();
-
-							}
-							else
-							{
-								if (x == 2)
-								{
-									cout << B << endl << "какое число вы хотите лицезреть??" << endl;
-									cin >> x;
-									cout << B[x];
-									_getch();
-
-								}
-								else {
-									cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-
-								}
-							}
-						}
-						case 27:
-						{
-							system("cls");
-							break;
-						}
-						}
-					}
+					Nomain<double>();
 					_getch();
 					break;
 				}
 				case 51: 
 				{
-					Vector <float>A;
-					Vector <float>B;
-					cout << "Хорошо продолжим.." << endl;
-					int key = 0;
-					while (key != 27)
-					{
-						key = get_key();
-						menu_2();
-						switch (key)
-						{
-						case 49:
-						{
-							Vector<float> b;
-							B = b;
-							cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-							//goto random;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 50:
-						{
-							system("cls");
-							cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
-							int size_one,size_two;
-							float epsilon;
-							cin >> size_one;
-							cout << "А теперь введем размерность 2 вектора" << endl;
-							cin >> size_two;
-							cout << "Замечательно, а теперь введите точность сравнения" << endl;
-							cin >> epsilon;
-							cout << "Самое время заполнить вектора" << endl;
-							Vector <float>a(size_one, epsilon);
-							cout << endl << "Остался последний вектор" << endl;
-							Vector <float>b(size_two, epsilon);
-							A = a;
-							B = b;
-							cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-							//goto Par;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 51:
-						{
-							system("cls");
-							cout << "1. Создать два моих собственных вектора" << endl << "2. Создать два одинаковых и рандомных вектора" << endl;
-							key = get_key();
-							switch (key)
-							{
-							case 49:
-							{
-								float epsilon;
-								cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-								cin >> size;
-								cout << "Замечательно, а теперь введите точность сравнения" << endl;
-								cin >> epsilon;
-								cout << "Самое время заполнить вектора" << endl;
-								Vector <float>a(size, epsilon);
-								A = a;
-								B = a;
-								cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-								//goto My_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							case 50:
-							{
-								B = A;
-								cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-								//goto random_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							}
-							_getch();
-							break;
-						}
-						}
-
-					}
-					key = 0;
-					while (key != 27)
-					{
-						menu_3();
-						cout << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-						key = get_key();
-						Vector <float>res;
-						switch (key)
-						{
-						case 49:
-						{
-							res = A + B;
-							cout << "A + B = " << res << endl;
-							_getch();
-							break;
-						}
-						case 50:
-						{
-							while (key != 0) {
-								cout << "Шо вычитаем?" << endl << "1. A - B" << endl << "2. B - A" << endl;
-
-
-								key = get_key();
-								if (key == 49) { res = A - B; cout << "A - B = " << res << endl; key = 0; }
-
-								else {
-									if (key == 50) { res = B - A; cout << "B - A = " << res << endl;  key = 0; }
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 51:
-						{
-							float x = A * B;
-							cout << "A * B = " << x << endl;
-							_getch();
-							break;
-						}
-						case 52:
-						{
-							float x;
-							cout << "Введите делитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что делим?" << endl << "1. A / x" << endl << "2. B / x" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A / x; cout << "A / x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = B / x; cout << "B / x = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 53:
-						{
-							float x;
-							cout << "Введите множитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что на что умножаем?" << endl << "1. A * x" << endl << "2. x * B" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A * x; cout << "A * x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = x * B; cout << "x * B = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 54:
-						{
-							float x;
-							x = B.square(A, B);
-							cout << "Площадь = " << x << endl;
-							_getch();
-							break;
-						}
-						case 55:
-						{
-							if (A == B) cout << A << "==" << B << endl;
-							else cout << A << "!=" << B << endl;
-							_getch();
-							break;
-						}
-						case 56:
-						{
-						
-							cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
-							int x;
-							x = get_key() - 48;
-							if (x == 1)
-							{
-
-								cout << "Выберите элемент" << A << endl;
-								cin >> x;
-									float temp = A[x];
-									cout << "Введите новое значение" << endl;
-									cin >> A[x];
-									cout << "предыдущее значение: " << temp << "изменено на " << A[x] << endl;
-							}
-							else
-							{
-								if (x == 2)
-								{
-									cout << "Выберите элемент" << B << endl;
-									cin>>x;
-									float temp = B[x];
-									cout << "Введите новое значение" << endl;
-									cin >> B[x];
-									cout << "предыдущее значение: " << temp << "изменено на " << B[x] << endl;
-
-								}
-								else
-								{
-									cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-								}
-							}
-
-							_getch();
-							break;
-						}
-						case 57:
-						{
-							system("cls");
-							cout << "1. Просмотреть значения вектора 1" << endl << "2. Просмотреть значения вектора 2" << endl;
-							int x;
-							cin >> x;
-							if (x == 1)
-							{
-								cout << A << endl << "какое число вы хотите лицезреть??" << endl;
-								cin >> x;
-								cout << A[x];
-								_getch();
-
-							}
-							else
-							{
-								if (x == 2)
-								{
-									cout << B << endl << "какое число вы хотите лицезреть??" << endl;
-									cin >> x;
-									cout << B[x];
-									_getch();
-
-								}
-								else {
-									cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-
-								}
-							}
-						}
-						case 27:
-						{
-							system("cls");
-							break;
-						}
-						}
-					}
+					Nomain<float>();
 					_getch();
 					break;
 				}
 				case 52: 
 				{
-					Vector <complex<double>>A;
-					Vector <complex<double>>B;
-					cout << "Хорошо продолжим.." << endl;
-					int key = 0;
-					while (key != 27)
-					{
-						key = get_key();
-						menu_2();
-						switch (key)
-						{
-						case 49:
-						{
-							Vector<complex<double>> b;
-							B = b;
-							cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-							//goto random;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 50:
-						{
-							system("cls");
-							cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
-							int size_one, size_two;
-							complex<double> epsilon;
-							cin >> size_one;
-							cout << "А теперь введем размерность 2 вектора" << endl;
-							cin >> size_two;
-							cout << "Замечательно, а теперь введите число сравнения" << endl;
-							cin >> epsilon;
-							cout << "Самое время заполнить вектора" << endl;
-							Vector <complex<double>>a(size_one, epsilon);
-							cout << endl << "Остался последний вектор" << endl;
-							Vector < complex<double>>b(size_two, epsilon);
-							A = a;
-							B = b;
-							cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-							//goto Par;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 51:
-						{
-							system("cls");
-							cout << "1. Создать два моих собственных вектора" << endl << "2. Создать два одинаковых и рандомных вектора" << endl;
-							key = get_key();
-							switch (key)
-							{
-							case 49:
-							{
-								complex<double> epsilon;
-								cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-								cin >> size;
-								cout << "Замечательно, а теперь введите число сравнения" << endl;
-								cin >> epsilon;
-								cout << "Самое время заполнить вектора" << endl;
-								Vector <complex<double>>a(size, epsilon);
-								A = a;
-								B = a;
-								cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-								//goto My_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							case 50:
-							{
-								B = A;
-								cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-								//goto random_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							}
-							_getch();
-							break;
-						}
-						}
-
-					}//
-					key = 0;
-					while (key != 27)
-					{
-						menu_3();
-						cout << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-						key = get_key();
-						Vector <complex<double>>res;
-						switch (key)
-						{
-						case 49:
-						{
-							res = A + B;
-							cout << "A + B = " << res << endl;
-							_getch();
-							break;
-						}
-						case 50:
-						{
-							while (key != 0) {
-								cout << "Шо вычитаем?" << endl << "1. A - B" << endl << "2. B - A" << endl;
-
-
-								key = get_key();
-								if (key == 49) { res = A - B; cout << "A - B = " << res << endl; key = 0; }
-
-								else {
-									if (key == 50) { res = B - A; cout << "B - A = " << res << endl;  key = 0; }
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 51:
-						{
-							complex<double> x = A * B;
-							cout << "A * B = " << x << endl;
-							_getch();
-							break;
-						}
-						case 52:
-						{
-							complex<double> x;
-							cout << "Введите делитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что делим?" << endl << "1. A / x" << endl << "2. B / x" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A / x; cout << "A / x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = B / x; cout << "B / x = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 53:
-						{
-							complex<double> x;
-							cout << "Введите множитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что на что умножаем?" << endl << "1. A * x" << endl << "2. x * B" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A * x; cout << "A * x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = x * B; cout << "x * B = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 54:
-						{
-							complex<double> x;
-							x = B.square(A, B);
-							cout << "Площадь = " << x << endl;
-							_getch();
-							break;
-						}
-						case 55:
-						{
-							if (A == B) cout << A << "==" << B << endl;
-							else cout << A << "!=" << B << endl;
-							_getch();
-							break;
-						}
-						case 56:
-						{
-							cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
-							int x;
-							x = get_key() - 48;
-							if (x == 1)
-							{
-
-								cout << "Выберите элемент" << A << endl;
-								cin >> x;
-
-									double real;
-									double image;
-									complex<double> temp = A[x];
-									cout << "Введите новое значение действительной части" << endl;
-									cin >> real;
-									cout << "Введите новое значение мнимой части" << endl;
-									cin>> image;
-									A[x]= complex<double>(real,image);
-									cout << "предыдущее значение: " << temp << "изменено на " << A[x] << endl;
-							
-							}
-							else
-							{
-								if (x == 2)
-								{
-									cout << "Выберите элемент" << B << endl;
-									cin >> x;
-									double real;
-									double image;
-									complex<double> temp = B[x];
-									cout << "Введите новое значение действительной части" << endl;
-									cin >> real;
-									cout << "Введите новое значение мнимой части" << endl;
-									cin >> image;
-									B[x] = complex<double>(real, image);
-									cout << "предыдущее значение: " << temp << "изменено на " << B[x] << endl;							
-								}
-								else
-								{
-									cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-									
-								}
-							}
-
-							_getch();
-							break;
-						}
-						case 57:
-						{
-							system("cls");
-							cout << "1. Просмотреть значения вектора 1" << endl << "2. Просмотреть значения вектора 2" << endl;
-							int x;
-							cin >> x;
-							if (x == 1)
-							{
-								cout << A << endl << "какое число вы хотите лицезреть??" << endl;
-								cin >> x;
-								cout << A[x];
-								_getch();
-
-							}
-							else
-							{
-								if (x == 2)
-								{
-									cout << B << endl << "какое число вы хотите лицезреть??" << endl;
-									cin >> x;
-									cout << B[x];
-									_getch();
-
-								}
-								else {
-									cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-
-								}
-							}
-						}
-						case 27:
-						{
-							system("cls");
-							break;
-						}
-						}
-					}
-
+					Nomain<complex<double>>();
 					_getch();
 					break;
 				}
 				case 53: 
 				{
-					Vector <complex<float>>A;
-					Vector <complex<float>>B;
-					cout << "Хорошо продолжим.." << endl;
-					int key = 0;
-					while (key != 27)
-					{
-						key = get_key();
-						menu_2();
-						switch (key)
-						{
-						case 49:
-						{
-							Vector<complex<float>> b;
-							B = b;
-							cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-							//goto random;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 50:
-						{
-							system("cls");
-							cout << "Давайте заполгним наши векторы" << endl << "Введите размерность первого вектора" << endl;
-							int size_one, size_two;
-							complex<float> epsilon;
-							cin >> size_one;
-							cout << "А теперь введем размерность 2 вектора" << endl;
-							cin >> size_two;
-							cout << "Замечательно, а теперь введите точность сравнения" << endl;
-							cin >> epsilon;
-							cout << "Самое время заполнить вектора" << endl;
-							Vector <complex<float>>a(size_one, epsilon);
-							cout << endl << "Остался последний вектор" << endl;
-							Vector < complex<float>>b(size_two, epsilon);
-							A = a;
-							B = b;
-							cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-							//goto Par;
-							_getch();
-							key = 27;
-							break;
-						}
-						case 51:
-						{
-							system("cls");
-							cout << "1. Создать два моих собственных вектора" << endl << "2. Создать два одинаковых и рандомных вектора" << endl;
-							key = get_key();
-							switch (key)
-							{
-							case 49:
-							{
-								complex<float> epsilon;
-								cout << "Давайте заполгним наши векторы" << endl << "Введите размерность векторов" << endl;
-								cin >> size;
-								cout << "Замечательно, а теперь введите точность сравнения" << endl;
-								cin >> epsilon;
-								cout << "Самое время заполнить вектора" << endl;
-								Vector <complex<float>>a(size, epsilon);
-								A = a;
-								B = a;
-								cout << "Готово, вы справились с этим" << endl << "Вы только поглядите какие они красивые :)" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-								//goto My_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							case 50:
-							{
-								B = A;
-								cout << "Ваши рандомные вектора" << endl << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-
-								//goto random_copy;
-								_getch();
-								key = 27;
-								break;
-							}
-							}
-							_getch();
-							break;
-						}
-						}
-
-					}
-					key = 0;
-					while (key != 27)
-					{
-						menu_3();
-						cout << "Вектор А: " << A << endl << "Вектор В: " << B << endl;
-						key = get_key();
-						Vector <complex<float>>res;
-						switch (key)
-						{
-						case 49:
-						{
-							res = A + B;
-							cout << "A + B = " << res << endl;
-							_getch();
-							break;
-						}
-						case 50:
-						{
-							while (key != 0) {
-								cout << "Шо вычитаем?" << endl << "1. A - B" << endl << "2. B - A" << endl;
-
-
-								key = get_key();
-								if (key == 49) { res = A - B; cout << "A - B = " << res << endl; key = 0; }
-
-								else {
-									if (key == 50) { res = B - A; cout << "B - A = " << res << endl;  key = 0; }
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 51:
-						{
-							complex<float> x = A * B;
-							cout << "A * B = " << x << endl;
-							_getch();
-							break;
-						}
-						case 52:
-						{
-							complex<float> x;
-							cout << "Введите делитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что делим?" << endl << "1. A / x" << endl << "2. B / x" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A / x; cout << "A / x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = B / x; cout << "B / x = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 53:
-						{
-							complex<float> x;
-							cout << "Введите множитель" << endl;
-							cin >> x;
-							while (key != 0) {
-								cout << "Что на что умножаем?" << endl << "1. A * x" << endl << "2. x * B" << endl;
-
-
-								key = get_key();
-								if (key == 49) {
-									res = A * x; cout << "A * x = " << res << endl; key = 0;
-								}
-
-								else {
-									if (key == 50) {
-										res = x * B; cout << "x * B = " << res << endl; key = 0;
-									}
-									else { cout << "тут только два выбора! :)" << endl; }
-								}
-							}
-							_getch();
-							break;
-						}
-						case 54:
-						{
-							complex<float> x;
-							x = B.square(A, B);
-							cout << "Площадь = " << x << endl;
-							_getch();
-							break;
-						}
-						case 55:
-						{
-							if (A == B) cout << A << "==" << B << endl;
-							else cout << A << "!=" << B << endl;
-							_getch();
-							break;
-						}
-						case 56:
-						{
-					
-							cout << "1. Изменить значения вектора 1" << endl << "2. Изменить значения вектора 2" << endl;
-							int x;
-							x = get_key() - 48;
-							if (x == 1)
-							{
-
-								cout << "Выберите элемент" << A << endl;
-								cin >> x;
-								float real;
-								float image;
-								complex <float> temp = A[x];
-								cout << "Введите новое значение действительной части" << endl;
-								cin >> real;
-								cout << "Введите новое значение мнимой части" << endl;
-								cin >> image;
-								A[x] = complex<float>(real, image);
-								cout << "предыдущее значение: " << temp << "изменено на " << A[x] << endl;
-							}
-							else
-							{
-								if (x == 2)
-								{
-									cout << "Выберите элемент" << B << endl;
-									cin >> x;
-									float real;
-									float image;
-									complex<float> temp = B[x];
-									cout << "Введите новое значение действительной части" << endl;
-									cin >> real;
-									cout << "Введите новое значение мнимой части" << endl;
-									cin >> image;
-									B[x] = complex<float>(real, image);
-									cout << "предыдущее значение: " << temp << "изменено на " << B[x] << endl;
-								}
-								else
-								{
-									cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-								}
-							}
-
-							_getch();
-							break;
-
-						}
-						case 57:
-						{
-							system("cls");
-							cout << "1. Просмотреть значения вектора 1" << endl << "2. Просмотреть значения вектора 2" << endl;
-							int x;
-							cin >> x;
-							if (x == 1)
-							{
-								cout << A << endl << "какое число вы хотите лицезреть??" << endl;
-								cin >> x;
-								cout << A[x];
-								_getch();
-
-							}
-							else
-							{
-								if (x == 2)
-								{
-									cout << B << endl << "какое число вы хотите лицезреть??" << endl;
-									cin >> x;
-									cout << B[x];
-									_getch();
-
-								}
-								else {
-									cout << "У вас только два выбора! Красная или синия таблетка?" << endl;
-									_getch();
-
-								}
-							}
-						}
-						case 27:
-						{
-							system("cls");
-							break;
-						}
-						}
-					}
-
+					Nomain<complex<float>>();
 					_getch();
 					break;
 				}

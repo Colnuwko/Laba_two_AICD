@@ -71,12 +71,12 @@ public:
 		}
 	*/
 	T operator[](int i) const { //×Òåíèå è çàïèñü
-		if (i<0 or i>_size) throw out_of_range("Недопустимое значение");
+		if (i<0 or i>_size-1) throw out_of_range("Недопустимое значение");
 		return data[i];
 	}
 
 	T& operator[](int i) {
-		if (i<0 or i>_size)  throw out_of_range("Недопустимое значение");
+		if (i<0 or i>_size-1)  throw out_of_range("Недопустимое значение");
 		return data[i];
 	}
 	friend ostream& operator<<(ostream& os, const Vector& a) 
@@ -277,15 +277,15 @@ public:
 		if (size < 1) throw invalid_argument("Íåäîïóñòèìîå çíà÷åíèå");
 		_size = size;
 		data = new complex<V>[size];
-		cout << "Ââåäèòå çíà÷åíèÿ:\n";
+		cout << "Введите значения в виде (число,число):\n";
 		V a = 0, b = 0;
 		for (size_t i = 0; i < size; i++)
 		{
-			cout << "Ââîäèòå ñíà÷àëà äåéñòâèòåëüíóþ ÷àñòü";
+			/*cout << "Ââîäèòå ñíà÷àëà äåéñòâèòåëüíóþ ÷àñòü";
 			cin >> a;
 			cout << "Ââîäèòå ìíèìóþ ÷àñòü";
-			cin >> b;
-			data[i] = complex<V>(a, b);
+			cin >> b;*/
+			cin >> data[i];
 
 		}
 	}
@@ -307,14 +307,25 @@ public:
 		}
 		return os;
 	}
+	friend ostream& operator>>(ostream& os, complex<V>& x)
+	{ 
+		V a;
+		V b;
+		cout << "ВВедите реально значение";
+		cin >> a;
+		cout << "Введите мнимое значение";
+		cin >> b;
+		x= complex<V>(a,b);
+		
+	}
 	int Get_size() { return _size; }
 	complex<V> operator[](int i) const { //×Òåíèå è çàïèñü
-		if (i<0 or i>_size) throw out_of_range("Invalid index");
+		if (i<0 or i>_size-1) throw out_of_range("Invalid index");
 		return data[i];
 	}
 
 	complex<V>& operator[](int i) {
-		if (i<0 or i>_size)  throw out_of_range("Invalid index");
+		if (i<0 or i>_size-1)  throw out_of_range("Invalid index");
 		return data[i];
 	}
 
